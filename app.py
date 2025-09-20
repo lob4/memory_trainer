@@ -15,7 +15,7 @@ def _reset_quiz() -> None:
     st.session_state.quiz = MultiplicationQuiz.generate(NUM_QUESTIONS)
     st.session_state.answers = [None] * len(st.session_state.quiz.questions)
     st.session_state.current_index = 0
-    st.session_state.current_answer = ""
+    st.session_state.pop("current_answer", None)
     st.session_state.pop("score", None)
 
 
@@ -66,7 +66,7 @@ def main() -> None:
                 st.session_state.answers[current_index] = None
 
             st.session_state.current_index = current_index + 1
-            st.session_state.current_answer = ""
+            st.session_state.pop("current_answer", None)
 
             if st.session_state.current_index == len(quiz.questions):
                 st.session_state.score = quiz.grade(st.session_state.answers)
